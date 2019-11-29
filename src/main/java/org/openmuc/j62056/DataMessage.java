@@ -193,7 +193,7 @@ public class DataMessage {
             sb.append("\n\t\t\t").append(dataSet.toString()).append(',');
         }
         sb.deleteCharAt(sb.length() - 1);
-        sb.append("\n\t\t}\n\t}\n]");
+        sb.append("\n\t\t]\n\t}\n}");
         return sb.toString();
     }
 
