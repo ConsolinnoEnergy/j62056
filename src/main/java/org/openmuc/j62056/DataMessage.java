@@ -34,8 +34,8 @@ import org.openmuc.jrxtx.SerialPort;
 /**
  * Represents the data sent by the meter.
  * 
- * The data consists of the manufacturer ID, the meter ID (optional), the enhanced ID/capability (optional), and a list
- * of data sets.
+ * The data consists of the manufacturer ID, the meter ID (optional), the
+ * enhanced ID/capability (optional), and a list of data sets.
  *
  */
 public class DataMessage {
@@ -52,8 +52,10 @@ public class DataMessage {
         this.dataSets = dataSets;
     }
 
-    // Mode A,B or C Data message ::= 'STX'(0x02) <data block> '!' '\r'(0x0D) '\n'(0x0A) 'ETX'(0x03) BCC
-    // Data block ::= List of data sets separated by CR and LF, Optionally the data block ends with a CR and LF
+    // Mode A,B or C Data message ::= 'STX'(0x02) <data block> '!' '\r'(0x0D)
+    // '\n'(0x0A) 'ETX'(0x03) BCC
+    // Data block ::= List of data sets separated by CR and LF, Optionally the data
+    // block ends with a CR and LF
     // Data set ::= Address '(' Value(optional) ('*' unit)(optional) ')'
     // BCC = block check character
 
@@ -154,7 +156,8 @@ public class DataMessage {
     }
 
     /**
-     * Returns the identification string (except for the enhanced identification characters).
+     * Returns the identification string (except for the enhanced identification
+     * characters).
      * 
      * @return the identification string
      */
@@ -183,19 +186,14 @@ public class DataMessage {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{\n\t\"data message\": {\n\t\t\"manufacturer ID\": \"")
-                .append(manufacturerId)
-                .append("\",\n\t\t\"meter ID\": \"")
-                .append(meterId)
-                .append("\",\n\t\t\"enhanced ID/capability\": \"")
-                .append(enhancedId)
-                .append("\"")
-                .append(IdentificationMessage.getEnhancedIdDescription(enhancedId))
-                .append(",\n\t\t\"data block\": {");
+                .append(manufacturerId).append("\",\n\t\t\"meter ID\": \"").append(meterId)
+                .append("\",\n\t\t\"enhanced ID/capability\": \"").append(enhancedId).append("\"")
+                .append(IdentificationMessage.getEnhancedIdDescription(enhancedId)).append(",\n\t\t\"data block\": [");
         for (DataSet dataSet : dataSets) {
             sb.append("\n\t\t\t").append(dataSet.toString()).append(',');
         }
         sb.deleteCharAt(sb.length() - 1);
-        sb.append("\n\t\t}\n\t}\n}");
+        sb.append("\n\t\t}\n\t}\n]");
         return sb.toString();
     }
 

@@ -30,8 +30,9 @@ import java.io.IOException;
 
 /**
  * 
- * A data message contains a list of data sets. Each data set consists of 3 fields "address", "value", and "unit". Each
- * of these fields is optional an may thus be equal to the empty string.
+ * A data message contains a list of data sets. Each data set consists of 3
+ * fields "address", "value", and "unit". Each of these fields is optional an
+ * may thus be equal to the empty string.
  * 
  */
 public class DataSet {
@@ -51,15 +52,9 @@ public class DataSet {
     }
 
     public void send(DataOutputStream os, Bcc bcc) throws IOException {
-        Helper.writeCharsAndCalculateBcc(
-                address == null ? "" : address, os, bcc
-        );
-        Helper.writeCharsAndCalculateBcc(
-                "(" + (value == null ? "" : value), os, bcc
-        );
-        Helper.writeCharsAndCalculateBcc(
-                unit == null || unit.isEmpty() ? ")" : "*" + unit + ")", os, bcc
-        );
+        Helper.writeCharsAndCalculateBcc(address == null ? "" : address, os, bcc);
+        Helper.writeCharsAndCalculateBcc("(" + (value == null ? "" : value), os, bcc);
+        Helper.writeCharsAndCalculateBcc(unit == null || unit.isEmpty() ? ")" : "*" + unit + ")", os, bcc);
     }
 
     public static DataSet readDataSet(DataInputStream is, Bcc bcc) throws IOException {
@@ -103,8 +98,7 @@ public class DataSet {
         String unit;
         if (b == ')') {
             unit = "";
-        }
-        else {
+        } else {
             i = 0;
             while ((b = Helper.readByteAndCalculateBcc(is, bcc)) != ')') {
                 if (i == BUFFER_LENGTH) {
@@ -123,10 +117,11 @@ public class DataSet {
     /**
      * Returns the address/ID of this data set.
      * <p>
-     * The address is usually an OBIS code of the format A-B:C.D.E*F or on older EDIS code of the format C.D.E. that
-     * specifies exactly what the value of this data set represents. C is the type of the measured quantity (e.g 1 =
-     * positive active power), D describes the measurement mode and E is the tariff (e.g. 0 for total or 1 for tariff 1
-     * only) associated with this value.
+     * The address is usually an OBIS code of the format A-B:C.D.E*F or on older
+     * EDIS code of the format C.D.E. that specifies exactly what the value of this
+     * data set represents. C is the type of the measured quantity (e.g 1 = positive
+     * active power), D describes the measurement mode and E is the tariff (e.g. 0
+     * for total or 1 for tariff 1 only) associated with this value.
      * <p>
      * If this data set contains no address this function returns the empty string.
      * 
@@ -140,7 +135,8 @@ public class DataSet {
      * Returns the value of this data set as a string.
      * <p>
      * The value is usually a decimal number that can be converted to a Double using
-     * {@link java.lang.Double#parseDouble(String)}. But the value may also be a date or have some other format.
+     * {@link java.lang.Double#parseDouble(String)}. But the value may also be a
+     * date or have some other format.
      * <p>
      * If this data set contains no value this function returns the empty string.
      * 
@@ -163,8 +159,7 @@ public class DataSet {
 
     @Override
     public String toString() {
-        return "\"data set\": {\"address\": \"" + address + "\", \"value\": \"" + value + "\", \"unit\": \"" + unit
-                + "\"}";
+        return "{\"address\": \"" + address + "\", \"value\": \"" + value + "\", \"unit\": \"" + unit + "\"}";
     }
 
 }
