@@ -7,7 +7,7 @@ path_readout=$(cat /boot/d0logging/lastreadingpath.conf)
 path_obis_selection=/boot/d0logging/lorawan.conf
 path_mqtt_config=/boot/d0logging/mqtt.conf
 cp $path_readout $path_readout-1
-j62056-reader -p /dev/ttyUSB0 -d 100 | tail -n +2 > $path_readout
+/opt/j62056/run-scripts/j62056-reader -p /dev/ttyUSB0 -d 100 | tail -n +2 > $path_readout
 
 obisSelection=$(jq -c '.obis[]' $path_mqtt_config)
 mqttServer=$(jq '.host' -r $path_mqtt_config)
