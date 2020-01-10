@@ -170,7 +170,7 @@ public class IdentificationMessage {
 
     public static String getEnhancedIdDescription(String enhancedId) {
         if (enhancedId.equals("2")) {
-            return "(HDLC)";
+            return "";
         }
         return "";
     }
