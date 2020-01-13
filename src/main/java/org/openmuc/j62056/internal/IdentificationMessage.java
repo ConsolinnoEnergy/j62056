@@ -164,7 +164,6 @@ public class IdentificationMessage {
     public String toString() {
         return "{\"identification message\": {\"manufacturer ID\": \"" + manufacturerId + "\", \"protocol mode\": \""
                 + protocolMode + "\", \"baud rate\": " + baudRate + ", \"meter ID\": \"" + meterId
-                + "\", \"enhanced ID/capability\": \"" + enhancedId + "\""
                 + "}}";
     }
 
