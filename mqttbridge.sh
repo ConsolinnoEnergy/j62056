@@ -14,7 +14,7 @@ mqttServer=$(jq '.host' -r $path_mqtt_config)
 mqttPort=$(jq '.port' -r $path_mqtt_config)
 mqttUser=$(jq '.user' -r $path_mqtt_config)
 mqttPass=$(jq '.password' -r $path_mqtt_config)
-serial=$(jq '."data message"."data block"[] | select(.address=="0.0.0") | .value' $path_readout)
+serial=$(jq '."data message"."data block"[] | select(.address | contains("0.0.0")) | .value' $path_readout)
 
 export LC_NUMERIC="en_US.UTF-8"
 
@@ -31,4 +31,8 @@ done <<<"$obisSelection"
 
 sJsonMQTTData="${sJsonMQTTData::-1}]"
 
+## debug output
+#echo $sJsonMQTTData
+
+## send live data
 mosquitto_pub -h $mqttServer -t sensors/d0logging -m "$sJsonMQTTData" -p $mqttPort -u $mqttUser -P $mqttPass
