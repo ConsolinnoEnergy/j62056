@@ -186,7 +186,7 @@ public class DataMessage {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{\n\t\"data message\": {\n\t\t\"manufacturer ID\": \"")
-                .append(manufacturerId).append("\",\n\t\t\"meter ID\": \"").append(meterId)
+                .append(manufacturerId).append("\",\n\t\t\"meter ID\": \"").append(meterId).append("\"")
                 .append(",\n\t\t\"data block\": [");
         for (DataSet dataSet : dataSets) {
             sb.append("\n\t\t\t").append(dataSet.toString()).append(',');
