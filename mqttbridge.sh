@@ -35,4 +35,4 @@ sJsonMQTTData="${sJsonMQTTData::-1}]"
 #echo $sJsonMQTTData
 
 ## send live data
-mosquitto_pub -h $mqttServer -t sensors/d0logging -m "$sJsonMQTTData" -p $mqttPort -capath /etc/ssl/certs/ -u $mqttUser -P $mqttPass
+mosquitto_pub -h $mqttServer -t sensors/d0logging -m "$sJsonMQTTData" -p $mqttPort --capath /etc/ssl/certs/ -u $mqttUser -P $mqttPass
